@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AuthService from "../services/auth.service";
 import DoctorService from "../services/doctor-service";
+import EventBus from "../common/EventBus";
 
 const Profile = () => {
   const [currentInfoUser, setCurrentInfoUser] = useState({});
@@ -11,6 +12,11 @@ const Profile = () => {
       (response) => {
         setCurrentInfoUser(response.data);
         console.log(response);
+      },
+      (error) => {
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
       }
     );
 

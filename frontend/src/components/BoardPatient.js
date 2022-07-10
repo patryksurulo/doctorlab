@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
+import PatientService from "../services/patient-service";
 
 const BoardPatient = () => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    UserService.getPatientBoard().then(
+    PatientService.getPatientBoard().then(
       (response) => {
         setContent(response.data);
       },

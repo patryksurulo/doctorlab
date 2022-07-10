@@ -19,8 +19,8 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/test")
-public class TestController {
+@RequestMapping("/api/patient")
+public class PatientController {
 
   @Autowired
   UserRepository userRepository;
@@ -28,20 +28,10 @@ public class TestController {
   @Autowired
   DoctorInfoRepository doctorInfoRepository;
 
-  public TestController(UserRepository userRepository) {
+  public PatientController(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
-  @GetMapping("/all")
-  public String allAccess() {
-    return "Public Content.";
-  }
-
-  @GetMapping("/patient")
-  @PreAuthorize("hasRole('PATIENT') or hasRole('DOCTOR') or hasRole('ADMIN')")
-  public String patientAccess() {
-    return "Patient Content.";
-  }
 
   @GetMapping("/make-an-appointment")
   @PreAuthorize("hasRole('PATIENT') or hasRole('DOCTOR') or hasRole('ADMIN')")
@@ -75,23 +65,5 @@ public class TestController {
   @PreAuthorize("hasRole('PATIENT') or hasRole('DOCTOR') or hasRole('ADMIN')")
   public String myAppointmentsAccess() {
     return "My appointments Content.";
-  }
-
-  @GetMapping("/doctor")
-  @PreAuthorize("hasRole('DOCTOR')")
-  public String doctorAccess() {
-    return "Doctor Board.";
-  }
-
-  @GetMapping("/creating-doctor")
-  @PreAuthorize("hasRole('ADMIN')")
-  public String creatingDoctorAccess() {
-    return "Creating doctor Board.";
-  }
-
-  @GetMapping("/admin")
-  @PreAuthorize("hasRole('ADMIN')")
-  public String adminAccess() {
-    return "Admin Board.";
   }
 }

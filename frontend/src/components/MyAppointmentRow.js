@@ -1,5 +1,4 @@
 import { useState } from "react";
-import UserService from "../services/user.service";
 import PaymentForm from "./PaymentForm";
 
 const MyAppointmentRow = ({appointment}) => {

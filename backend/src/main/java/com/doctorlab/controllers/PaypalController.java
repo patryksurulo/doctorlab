@@ -26,14 +26,14 @@ public class PaypalController {
     public static final String SUCCESS_URL = "pay/success";
     public static final String CANCEL_URL = "pay/cancel";
 
-    @GetMapping("/")
-    @PreAuthorize("hasRole('PATIENT') or hasRole('DOCTOR') or hasRole('ADMIN')")
-    public String home() {
-        return "home";
-    }
+//    @GetMapping("/")
+//    @PreAuthorize("hasRole('PATIENT') or hasRole('DOCTOR') or hasRole('ADMIN')")
+//    public String home() {
+//        return "home";
+//    }
 
     @PostMapping("/pay")
-    @PreAuthorize("hasRole('PATIENT') or hasRole('DOCTOR') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('PATIENT')")
     public String payment(@Valid @RequestBody AppointmentPaymentRequest appPayReq) {
         try {
             Payment payment = service.createPayment(appPayReq.getPrice(), appPayReq.getCurrency(), appPayReq.getMethod(),
